@@ -33,6 +33,7 @@ namespace BeatSaberCampaignCreator
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (listBox1.SelectedIndex >= campaign.challenges.Count() || campaign.challenges.Count() < 0) return;
             currentChallenge = listBox1.SelectedIndex;
             SetDataToCurrentSelected();
         }
@@ -80,6 +81,9 @@ namespace BeatSaberCampaignCreator
                 externalModsList.Items.Add(pair.Key);
             }
             if (externalModsList.Items.Count > 0) externalModsList.SelectedIndex = 0;
+            isExtLoading = true;
+            textBox1.Text = "";
+            isExtLoading = false;
             isLoading = false;
         }
         private void ChallengeDataValueChange(object sender, EventArgs e)

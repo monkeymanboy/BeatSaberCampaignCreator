@@ -43,6 +43,7 @@
             this.campaignName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
@@ -60,7 +61,21 @@
             this.strictAngles = new System.Windows.Forms.CheckBox();
             this.disappearingArrows = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.requirementValue = new System.Windows.Forms.NumericUpDown();
+            this.requirementIsMax = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.remReq = new System.Windows.Forms.Button();
+            this.requirementType = new System.Windows.Forms.ComboBox();
+            this.addReq = new System.Windows.Forms.Button();
+            this.reqList = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.remExtMod = new System.Windows.Forms.Button();
+            this.addExtMod = new System.Windows.Forms.Button();
+            this.externalModsList = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -73,24 +88,9 @@
             this.challengeDesc = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.challengeName = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.remReq = new System.Windows.Forms.Button();
-            this.addReq = new System.Windows.Forms.Button();
-            this.reqList = new System.Windows.Forms.ListBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.requirementType = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.requirementValue = new System.Windows.Forms.NumericUpDown();
-            this.requirementIsMax = new System.Windows.Forms.CheckBox();
-            this.externalModsList = new System.Windows.Forms.ListBox();
-            this.remExtMod = new System.Windows.Forms.Button();
-            this.addExtMod = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -99,9 +99,9 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.speedMul)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.requirementValue)).BeginInit();
             this.tabPage5.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.requirementValue)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -232,13 +232,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.tabControl2);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.challengeDesc);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.challengeName);
-            this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.listBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -248,6 +248,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Challenges";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(41, 3);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(370, 13);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "To delete or re order challenges just open the folder and rename the json files";
             // 
             // tabControl2
             // 
@@ -453,6 +462,94 @@
             this.tabPage4.Text = "Requirements";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(101, 61);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(34, 13);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Value";
+            // 
+            // requirementValue
+            // 
+            this.requirementValue.Location = new System.Drawing.Point(141, 59);
+            this.requirementValue.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.requirementValue.Name = "requirementValue";
+            this.requirementValue.Size = new System.Drawing.Size(120, 20);
+            this.requirementValue.TabIndex = 21;
+            this.requirementValue.ValueChanged += new System.EventHandler(this.RequirementValueChanged);
+            // 
+            // requirementIsMax
+            // 
+            this.requirementIsMax.AutoSize = true;
+            this.requirementIsMax.Location = new System.Drawing.Point(98, 85);
+            this.requirementIsMax.Name = "requirementIsMax";
+            this.requirementIsMax.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.requirementIsMax.Size = new System.Drawing.Size(57, 17);
+            this.requirementIsMax.TabIndex = 20;
+            this.requirementIsMax.Text = "Is Max";
+            this.requirementIsMax.UseVisualStyleBackColor = true;
+            this.requirementIsMax.CheckedChanged += new System.EventHandler(this.RequirementValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(104, 35);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(31, 13);
+            this.label13.TabIndex = 15;
+            this.label13.Text = "Type";
+            // 
+            // remReq
+            // 
+            this.remReq.Location = new System.Drawing.Point(6, 6);
+            this.remReq.Name = "remReq";
+            this.remReq.Size = new System.Drawing.Size(29, 20);
+            this.remReq.TabIndex = 5;
+            this.remReq.Text = "-";
+            this.remReq.UseVisualStyleBackColor = true;
+            this.remReq.Click += new System.EventHandler(this.remReq_Click);
+            // 
+            // requirementType
+            // 
+            this.requirementType.FormattingEnabled = true;
+            this.requirementType.Items.AddRange(new object[] {
+            "score",
+            "bombsHit",
+            "blocksMissed",
+            "saberDistance",
+            "perfectCuts"});
+            this.requirementType.Location = new System.Drawing.Point(141, 32);
+            this.requirementType.Name = "requirementType";
+            this.requirementType.Size = new System.Drawing.Size(121, 21);
+            this.requirementType.TabIndex = 14;
+            this.requirementType.SelectedValueChanged += new System.EventHandler(this.RequirementValueChanged);
+            // 
+            // addReq
+            // 
+            this.addReq.Location = new System.Drawing.Point(56, 6);
+            this.addReq.Name = "addReq";
+            this.addReq.Size = new System.Drawing.Size(29, 20);
+            this.addReq.TabIndex = 4;
+            this.addReq.Text = "+";
+            this.addReq.UseVisualStyleBackColor = true;
+            this.addReq.Click += new System.EventHandler(this.addReq_Click);
+            // 
+            // reqList
+            // 
+            this.reqList.DisplayMember = "1";
+            this.reqList.FormattingEnabled = true;
+            this.reqList.Location = new System.Drawing.Point(6, 32);
+            this.reqList.Name = "reqList";
+            this.reqList.Size = new System.Drawing.Size(79, 212);
+            this.reqList.TabIndex = 3;
+            this.reqList.SelectedIndexChanged += new System.EventHandler(this.reqList_SelectedIndexChanged);
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.label16);
@@ -467,6 +564,62 @@
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "External Modifiers";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(139, 44);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(241, 13);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Seperate items for the selected mod by a new line";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(136, 7);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(315, 13);
+            this.label15.TabIndex = 9;
+            this.label15.Text = "This is where you put info for other mods to be used in challenges";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(141, 60);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(310, 193);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // remExtMod
+            // 
+            this.remExtMod.Location = new System.Drawing.Point(6, 3);
+            this.remExtMod.Name = "remExtMod";
+            this.remExtMod.Size = new System.Drawing.Size(29, 20);
+            this.remExtMod.TabIndex = 7;
+            this.remExtMod.Text = "-";
+            this.remExtMod.UseVisualStyleBackColor = true;
+            this.remExtMod.Click += new System.EventHandler(this.remExtMod_Click);
+            // 
+            // addExtMod
+            // 
+            this.addExtMod.Location = new System.Drawing.Point(84, 3);
+            this.addExtMod.Name = "addExtMod";
+            this.addExtMod.Size = new System.Drawing.Size(29, 20);
+            this.addExtMod.TabIndex = 6;
+            this.addExtMod.Text = "+";
+            this.addExtMod.UseVisualStyleBackColor = true;
+            this.addExtMod.Click += new System.EventHandler(this.addExtMod_Click);
+            // 
+            // externalModsList
+            // 
+            this.externalModsList.FormattingEnabled = true;
+            this.externalModsList.Location = new System.Drawing.Point(6, 27);
+            this.externalModsList.Name = "externalModsList";
+            this.externalModsList.Size = new System.Drawing.Size(107, 212);
+            this.externalModsList.TabIndex = 0;
+            this.externalModsList.SelectedIndexChanged += new System.EventHandler(this.externalModsList_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -587,18 +740,9 @@
             this.challengeName.TabIndex = 3;
             this.challengeName.TextChanged += new System.EventHandler(this.ChallengeDataValueChange);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(6, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(29, 20);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "-";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(56, 3);
+            this.button1.Location = new System.Drawing.Point(6, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(29, 20);
             this.button1.TabIndex = 1;
@@ -620,150 +764,6 @@
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
-            // remReq
-            // 
-            this.remReq.Location = new System.Drawing.Point(6, 6);
-            this.remReq.Name = "remReq";
-            this.remReq.Size = new System.Drawing.Size(29, 20);
-            this.remReq.TabIndex = 5;
-            this.remReq.Text = "-";
-            this.remReq.UseVisualStyleBackColor = true;
-            this.remReq.Click += new System.EventHandler(this.remReq_Click);
-            // 
-            // addReq
-            // 
-            this.addReq.Location = new System.Drawing.Point(56, 6);
-            this.addReq.Name = "addReq";
-            this.addReq.Size = new System.Drawing.Size(29, 20);
-            this.addReq.TabIndex = 4;
-            this.addReq.Text = "+";
-            this.addReq.UseVisualStyleBackColor = true;
-            this.addReq.Click += new System.EventHandler(this.addReq_Click);
-            // 
-            // reqList
-            // 
-            this.reqList.DisplayMember = "1";
-            this.reqList.FormattingEnabled = true;
-            this.reqList.Location = new System.Drawing.Point(6, 32);
-            this.reqList.Name = "reqList";
-            this.reqList.Size = new System.Drawing.Size(79, 212);
-            this.reqList.TabIndex = 3;
-            this.reqList.SelectedIndexChanged += new System.EventHandler(this.reqList_SelectedIndexChanged);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(104, 35);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(31, 13);
-            this.label13.TabIndex = 15;
-            this.label13.Text = "Type";
-            // 
-            // requirementType
-            // 
-            this.requirementType.FormattingEnabled = true;
-            this.requirementType.Items.AddRange(new object[] {
-            "score",
-            "bombsHit",
-            "blocksMissed",
-            "saberDistance",
-            "perfectCuts"});
-            this.requirementType.Location = new System.Drawing.Point(141, 32);
-            this.requirementType.Name = "requirementType";
-            this.requirementType.Size = new System.Drawing.Size(121, 21);
-            this.requirementType.TabIndex = 14;
-            this.requirementType.SelectedValueChanged += new System.EventHandler(this.RequirementValueChanged);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(101, 61);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(34, 13);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "Value";
-            // 
-            // requirementValue
-            // 
-            this.requirementValue.Location = new System.Drawing.Point(141, 59);
-            this.requirementValue.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.requirementValue.Name = "requirementValue";
-            this.requirementValue.Size = new System.Drawing.Size(120, 20);
-            this.requirementValue.TabIndex = 21;
-            this.requirementValue.ValueChanged += new System.EventHandler(this.RequirementValueChanged);
-            // 
-            // requirementIsMax
-            // 
-            this.requirementIsMax.AutoSize = true;
-            this.requirementIsMax.Location = new System.Drawing.Point(98, 85);
-            this.requirementIsMax.Name = "requirementIsMax";
-            this.requirementIsMax.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.requirementIsMax.Size = new System.Drawing.Size(57, 17);
-            this.requirementIsMax.TabIndex = 20;
-            this.requirementIsMax.Text = "Is Max";
-            this.requirementIsMax.UseVisualStyleBackColor = true;
-            this.requirementIsMax.CheckedChanged += new System.EventHandler(this.RequirementValueChanged);
-            // 
-            // externalModsList
-            // 
-            this.externalModsList.FormattingEnabled = true;
-            this.externalModsList.Location = new System.Drawing.Point(6, 27);
-            this.externalModsList.Name = "externalModsList";
-            this.externalModsList.Size = new System.Drawing.Size(107, 212);
-            this.externalModsList.TabIndex = 0;
-            this.externalModsList.SelectedIndexChanged += new System.EventHandler(this.externalModsList_SelectedIndexChanged);
-            // 
-            // remExtMod
-            // 
-            this.remExtMod.Location = new System.Drawing.Point(6, 3);
-            this.remExtMod.Name = "remExtMod";
-            this.remExtMod.Size = new System.Drawing.Size(29, 20);
-            this.remExtMod.TabIndex = 7;
-            this.remExtMod.Text = "-";
-            this.remExtMod.UseVisualStyleBackColor = true;
-            this.remExtMod.Click += new System.EventHandler(this.remExtMod_Click);
-            // 
-            // addExtMod
-            // 
-            this.addExtMod.Location = new System.Drawing.Point(84, 3);
-            this.addExtMod.Name = "addExtMod";
-            this.addExtMod.Size = new System.Drawing.Size(29, 20);
-            this.addExtMod.TabIndex = 6;
-            this.addExtMod.Text = "+";
-            this.addExtMod.UseVisualStyleBackColor = true;
-            this.addExtMod.Click += new System.EventHandler(this.addExtMod_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(141, 60);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(310, 193);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(136, 7);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(315, 13);
-            this.label15.TabIndex = 9;
-            this.label15.Text = "This is where you put info for other mods to be used in challenges";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(139, 44);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(241, 13);
-            this.label16.TabIndex = 10;
-            this.label16.Text = "Seperate items for the selected mod by a new line";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -772,7 +772,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Campaign Creator";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -786,11 +786,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.speedMul)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.requirementValue)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.requirementValue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -810,7 +810,6 @@
         private System.Windows.Forms.TextBox campaignName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label5;
@@ -860,6 +859,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label17;
     }
 }
 
