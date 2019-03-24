@@ -17,6 +17,8 @@ namespace BeatSaberCampaignCreator
 {
     public partial class Form1 : Form
     {
+
+        Ookii.Dialogs.Wpf.VistaFolderBrowserDialog folderBrowserDialog1;
         Campaign campaign = null;
         string currentDirectory;
         int currentChallenge = 0;
@@ -52,7 +54,7 @@ namespace BeatSaberCampaignCreator
             isLoading = true;
             Challenge challenge = campaign.challenges[currentChallenge];
             challengeName.Text = challenge.name;
-            challengeDesc.Text = challenge.desc;
+            beatmapCharacteristic.Text = challenge.characteristic;
             songID.Text = challenge.songid;
             customDownloadURL.Text = challenge.customDownloadURL;
             difficulty.SelectedIndex = (int)challenge.difficulty;
@@ -64,6 +66,8 @@ namespace BeatSaberCampaignCreator
             instaFail.Checked = challenge.modifiers.instaFail;
             noFail.Checked = challenge.modifiers.noFail;
             batteryEnergy.Checked = challenge.modifiers.batteryEnergy;
+            ghostNotes.Checked = challenge.modifiers.ghostNotes;
+            noArrows.Checked = challenge.modifiers.noArrows;
             speedMul.Value = (decimal)challenge.modifiers.speedMul;
             energyType.SelectedIndex = (int)challenge.modifiers.energyType;
             enabledObstacles.SelectedIndex = (int)challenge.modifiers.enabledObstacleType;
@@ -101,7 +105,7 @@ namespace BeatSaberCampaignCreator
             if (campaign == null) return;
             Challenge challenge = campaign.challenges[currentChallenge];
             challenge.name = challengeName.Text;
-            challenge.desc = challengeDesc.Text;
+            challenge.characteristic = beatmapCharacteristic.Text;
             challenge.songid = songID.Text;
             challenge.customDownloadURL = customDownloadURL.Text;
             challenge.difficulty = (BeatmapDifficulty)difficulty.SelectedIndex;
@@ -113,6 +117,8 @@ namespace BeatSaberCampaignCreator
             challenge.modifiers.instaFail = instaFail.Checked;
             challenge.modifiers.noFail = noFail.Checked;
             challenge.modifiers.batteryEnergy = batteryEnergy.Checked;
+            challenge.modifiers.ghostNotes = ghostNotes.Checked;
+            challenge.modifiers.noArrows = noArrows.Checked;
             challenge.modifiers.speedMul = (float)speedMul.Value;
             challenge.modifiers.energyType = (GameplayModifiers.EnergyType)energyType.SelectedIndex;
             challenge.modifiers.enabledObstacleType = (GameplayModifiers.EnabledObstacleType)enabledObstacles.SelectedIndex;
@@ -124,6 +130,7 @@ namespace BeatSaberCampaignCreator
             campaignName.Text = campaign.info.name;
             campaignDesc.Text = campaign.info.desc;
             allUnlocked.Checked = campaign.info.allUnlocked;
+            numericUpDown1.Value = campaign.info.mapHeight;
             updatingCampaign = false;
         }
         public void UpdateCampaignInfo()
@@ -136,13 +143,12 @@ namespace BeatSaberCampaignCreator
         //Header
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog1.ShowDialog().Value)
             {
                 string path = folderBrowserDialog1.SelectedPath;
                 currentDirectory = path;
                 campaign = new Campaign();
                 campaign.info = new CampaignInfo();
-                campaign.info.version = "0.1";
                 campaign.challenges = new List<BeatSaberDailyChallenges.Challenge>();
                 listBox1.Items.Clear();
                 AddChallenge();
@@ -150,12 +156,13 @@ namespace BeatSaberCampaignCreator
                 tabControl1.Enabled = true;
                 SetCampaignInfoData();
                 SetDataToCurrentSelected();
+                PrepareMap();
             }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog1.ShowDialog().Value)
             {
                 string path = folderBrowserDialog1.SelectedPath;
                 currentDirectory = path;
@@ -174,6 +181,7 @@ namespace BeatSaberCampaignCreator
                 SetCampaignInfoData();
                 SetDataToCurrentSelected();
                 SetRequirementToSelected();
+                PrepareMap();
                 tabControl1.Enabled = true;
             }
         }
@@ -330,6 +338,257 @@ namespace BeatSaberCampaignCreator
             prompt.AcceptButton = confirmation;
 
             return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
+        }
+
+
+        //MAP STUFF
+        public enum MapState
+        {
+            ADD,CONNECT,CONNECTING,DISCONNECT,DISCONNECTING,MOVE,MOVING,EDIT,ADD_GATE,REMOVE_GATES,EDIT_GATES,MOVE_GATES,MOVING_GATE
+        }
+        private bool CanSwitchState()
+        {
+            return currentState != MapState.MOVING && currentState != MapState.ADD && currentState != MapState.CONNECTING && currentState != MapState.DISCONNECTING && currentState != MapState.ADD_GATE && currentState != MapState.MOVING_GATE;
+        }
+        MapState currentState = MapState.EDIT;
+        private void setState(MapState newState)
+        {
+            currentState = newState;
+            mapState.Text = "State: " + currentState.ToString();
+        }
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (updatingCampaign) return;
+            UpdateMapHeight((int)numericUpDown1.Value);
+        }
+        public void UpdateMapHeight(int height)
+        {
+            campaign.info.mapHeight = height;
+            mapArea.Height = height;
+        }
+
+        Pen pen = new Pen(Brushes.Red, 8);
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            //Draw arrows
+            Graphics g = e.Graphics;
+            pen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            foreach(NodeButton node in nodes)
+            {
+                foreach(NodeButton childNode in node.children)
+                {
+                    g.DrawLine(pen, childNode.Location.X+childNode.Width/2, childNode.Location.Y + childNode.Height / 2, node.Location.X + node.Width / 2, node.Location.Y + node.Width / 2);
+                }
+            }
+        }
+
+        NodeButton currentNode;
+        List<NodeButton> nodes = new List<NodeButton>();
+        public void PrepareMap()
+        {
+            foreach (NodeButton node in nodes)
+            {
+                node.Parent.Controls.Remove(node);
+            }
+            foreach (GateButton gate in gates)
+            {
+                gate.Parent.Controls.Remove(gate);
+            }
+            nodes.Clear();
+            gates.Clear();
+            UpdateMapHeight(campaign.info.mapHeight);
+            foreach (CampainMapPosition mapPos in campaign.info.mapPositions)
+            {
+                currentNode = new NodeButton();
+                mapArea.Controls.Add(currentNode);
+                currentNode.mapPosition = mapPos;
+                currentNode.Location = new Point((int)mapPos.x - currentNode.Width / 2 + (currentNode.Parent.Bounds.Width) / 2, (int)mapPos.y - currentNode.Height / 2);
+                currentNode.Text = nodes.Count + "";
+                currentNode.Click += clickNode;
+                nodes.Add(currentNode);
+            }
+            foreach (CampaignUnlockGate gate in campaign.info.unlockGate)
+            {
+                currentGate = new GateButton();
+                mapArea.Controls.Add(currentGate);
+                currentGate.unlockGate = gate;
+                currentGate.Location = new Point((int)gate.x - currentGate.Width / 2 + (currentGate.Parent.Bounds.Width) / 2, (int)gate.y - currentGate.Height / 2);
+                currentGate.Text = "UNLOCK GATE";
+                currentGate.Click += clickGate;
+                gates.Add(currentGate);
+            }
+            foreach (NodeButton node in nodes)
+            {
+                List<NodeButton> children = new List<NodeButton>();
+                foreach(int i in node.mapPosition.childNodes)
+                {
+                    children.Add(nodes[i]);
+                }
+                node.children = children;
+            }
+            mapArea.Refresh();
+        }
+
+        private void addNode_Click(object sender, EventArgs e)
+        {
+            if (!CanSwitchState()) return;
+            if (campaign.info.mapPositions.Count >= campaign.challenges.Count)
+            {
+                ShowDialog("You cannot have more nodes than challenges, if you wish to add more ndoes, add the challenges for those ndoes first." , "Error");
+                return;
+            }
+            setState(MapState.ADD);
+            currentNode = new NodeButton();
+            currentNode.Text = nodes.Count+"";
+            mapArea.Controls.Add(currentNode);
+            currentNode.Click += placeNode;
+            //this.Controls.Add(button);
+        }
+
+        private void placeNode(object sender, EventArgs e)
+        {
+            if (currentState != MapState.ADD) return;
+            currentNode.Click -= placeNode;
+            currentNode.Click += clickNode;
+            nodes.Add(currentNode);
+            campaign.info.mapPositions.Add(currentNode.mapPosition);
+            setState(MapState.EDIT);
+            mapArea.Refresh();
+        }
+        private void clickNode(object sender, EventArgs e)
+        {
+            switch (currentState)
+            {
+                case MapState.CONNECT:
+                    currentNode = (NodeButton)sender;
+                    setState(MapState.CONNECTING);
+                    break;
+                case MapState.CONNECTING:
+                    if (sender == currentNode) return;
+                    currentNode.children.Add((NodeButton)sender);
+                    currentNode.UpdateChildren(nodes);
+                    setState(MapState.CONNECT);
+                    mapArea.Refresh();
+                    break;
+                case MapState.DISCONNECT:
+                    currentNode = (NodeButton)sender;
+                    setState(MapState.DISCONNECTING);
+                    break;
+                case MapState.DISCONNECTING:
+                    currentNode.children.Remove((NodeButton)sender);
+                    currentNode.UpdateChildren(nodes);
+                    setState(MapState.DISCONNECT);
+                    mapArea.Refresh();
+                    break;
+                case MapState.MOVE:
+                    currentNode = (NodeButton)sender;
+                    setState(MapState.MOVING);
+                    break;
+                case MapState.MOVING:
+                    setState(MapState.MOVE);
+                    break;
+                case MapState.EDIT:
+                    new FormEditNode(((NodeButton)sender).mapPosition).ShowDialog();
+                    break;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (currentState == MapState.ADD || currentState == MapState.MOVING) currentNode.SetPosition(new Point(MousePosition.X - Bounds.Location.X - 10 - mapArea.Bounds.Location.X - panel1.Location.X - groupBox2.Location.X - tabControl1.Location.X - currentNode.Width / 2, MousePosition.Y - Bounds.Location.Y - 70 - mapArea.Bounds.Location.Y - panel1.Location.Y - groupBox2.Location.Y - tabControl1.Location.Y + currentNode.Height / 2));
+            if (currentState == MapState.ADD_GATE || currentState == MapState.MOVING_GATE) currentGate.SetPosition(new Point(MousePosition.X - Bounds.Location.X - 10 - mapArea.Bounds.Location.X - panel1.Location.X - groupBox2.Location.X - tabControl1.Location.X - currentGate.Width / 2, MousePosition.Y - Bounds.Location.Y - 70 - mapArea.Bounds.Location.Y - panel1.Location.Y - groupBox2.Location.Y - tabControl1.Location.Y + currentGate.Height / 2));
+            if (currentState == MapState.MOVING) mapArea.Refresh();
+        }
+
+        private void connectNodes_Click(object sender, EventArgs e)
+        {
+            if (!CanSwitchState()) return;
+            setState(MapState.CONNECT);
+        }
+
+        private void disconnectNodes_Click(object sender, EventArgs e)
+        {
+            if (!CanSwitchState()) return;
+            setState(MapState.DISCONNECT);
+        }
+
+        private void moveNodes_Click(object sender, EventArgs e)
+        {
+            if (!CanSwitchState()) return;
+            setState(MapState.MOVE);
+        }
+
+        private void editNode_Click(object sender, EventArgs e)
+        {
+            if (!CanSwitchState()) return;
+            setState(MapState.EDIT);
+        }
+        GateButton currentGate = new GateButton();
+        List<GateButton> gates = new List<GateButton>();
+        private void addGate_Click(object sender, EventArgs e)
+        {
+            if (!CanSwitchState()) return;
+            setState(MapState.ADD_GATE);
+            currentGate = new GateButton();
+            currentGate.Text = "UNLOCK GATE";
+            mapArea.Controls.Add(currentGate);
+            currentGate.Click += placeGate;
+        }
+
+        private void placeGate(object sender, EventArgs e)
+        {
+            if (currentState != MapState.ADD_GATE) return;
+            currentGate.Click -= placeGate;
+            currentGate.Click += clickGate;
+            gates.Add(currentGate);
+            campaign.info.unlockGate.Add(currentGate.unlockGate);
+            setState(MapState.EDIT_GATES);
+            mapArea.Refresh();
+        }
+        private void clickGate(object sender, EventArgs e)
+        {
+            switch (currentState)
+            {
+                case MapState.REMOVE_GATES:
+                    gates.Remove((GateButton)sender);
+                    mapArea.Controls.Remove((GateButton)sender);
+                    campaign.info.unlockGate.Remove(((GateButton)sender).unlockGate);
+                    break;
+                case MapState.MOVE_GATES:
+                    currentGate = (GateButton)sender;
+                    setState(MapState.MOVING_GATE);
+                    break;
+                case MapState.MOVING_GATE:
+                    setState(MapState.MOVE_GATES);
+                    break;
+                case MapState.EDIT_GATES:
+                    new FormEditGate(((GateButton)sender).unlockGate).ShowDialog();
+                    break;
+            }
+        }
+
+        private void removeGates_Click(object sender, EventArgs e)
+        {
+            if (!CanSwitchState()) return;
+            setState(MapState.REMOVE_GATES);
+        }
+
+        private void editGates_Click(object sender, EventArgs e)
+        {
+            if (!CanSwitchState()) return;
+            setState(MapState.EDIT_GATES);
+        }
+
+        private void moveGates_Click(object sender, EventArgs e)
+        {
+            if (!CanSwitchState()) return;
+            setState(MapState.MOVE_GATES);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        
+            folderBrowserDialog1 = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
         }
     }
 }

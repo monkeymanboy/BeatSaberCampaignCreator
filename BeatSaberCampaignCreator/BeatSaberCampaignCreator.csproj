@@ -39,8 +39,19 @@
     <Reference Include="BeatSaberChallenges">
       <HintPath>E:\Program Files (x86)\Steam\steamapps\common\Beat Saber\Plugins\BeatSaberChallenges.dll</HintPath>
     </Reference>
+    <Reference Include="BeatSaberCustomUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\Program Files (x86)\Steam\steamapps\common\Beat Saber\Plugins\BeatSaberCustomUI.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>E:\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ookii.Dialogs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Ookii.Dialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>..\Libs\Ookii.Dialogs.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,10 +74,34 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEditGate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditGate.Designer.cs">
+      <DependentUpon>FormEditGate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEditNode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditNode.Designer.cs">
+      <DependentUpon>FormEditNode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GateButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NodeButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEditGate.resx">
+      <DependentUpon>FormEditGate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEditNode.resx">
+      <DependentUpon>FormEditNode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

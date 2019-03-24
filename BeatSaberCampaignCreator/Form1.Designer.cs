@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -46,6 +47,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.noArrows = new System.Windows.Forms.CheckBox();
+            this.ghostNotes = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.speedMul = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
@@ -84,13 +87,30 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.songID = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.challengeDesc = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.challengeName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.moveGates = new System.Windows.Forms.Button();
+            this.editGates = new System.Windows.Forms.Button();
+            this.removeGates = new System.Windows.Forms.Button();
+            this.addGate = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.editNode = new System.Windows.Forms.Button();
+            this.moveNodes = new System.Windows.Forms.Button();
+            this.disconnectNodes = new System.Windows.Forms.Button();
+            this.connectNodes = new System.Windows.Forms.Button();
+            this.mapState = new System.Windows.Forms.Label();
+            this.addNode = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.mapArea = new System.Windows.Forms.Panel();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.beatmapCharacteristic = new System.Windows.Forms.ComboBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -102,6 +122,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.requirementValue)).BeginInit();
             this.tabPage5.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -110,7 +134,7 @@
             this.toolStripDropDownButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(618, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(650, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -152,11 +176,12 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Enabled = false;
             this.tabControl1.Location = new System.Drawing.Point(12, 37);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(577, 538);
+            this.tabControl1.Size = new System.Drawing.Size(613, 538);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -170,7 +195,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(569, 512);
+            this.tabPage1.Size = new System.Drawing.Size(605, 512);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Campaign Info";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -226,17 +251,16 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(127, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(287, 13);
+            this.label1.Size = new System.Drawing.Size(297, 26);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Don\'t forget to put a nice cover.png in your campaign folder";
+            this.label1.Text = "Don\'t forget to put a nice \"cover.png\" in your campaign folder\r\nAlso if you want " +
+    "to get fancy add a \"map background.png\"";
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.tabControl2);
             this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.challengeDesc);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.challengeName);
             this.tabPage2.Controls.Add(this.button1);
@@ -244,7 +268,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(569, 512);
+            this.tabPage2.Size = new System.Drawing.Size(605, 512);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Challenges";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -271,6 +295,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.noArrows);
+            this.tabPage3.Controls.Add(this.ghostNotes);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.speedMul);
             this.tabPage3.Controls.Add(this.label11);
@@ -292,6 +318,28 @@
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Modifiers";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // noArrows
+            // 
+            this.noArrows.AutoSize = true;
+            this.noArrows.Location = new System.Drawing.Point(6, 213);
+            this.noArrows.Name = "noArrows";
+            this.noArrows.Size = new System.Drawing.Size(75, 17);
+            this.noArrows.TabIndex = 21;
+            this.noArrows.Text = "No Arrows";
+            this.noArrows.UseVisualStyleBackColor = true;
+            this.noArrows.CheckedChanged += new System.EventHandler(this.ChallengeDataValueChange);
+            // 
+            // ghostNotes
+            // 
+            this.ghostNotes.AutoSize = true;
+            this.ghostNotes.Location = new System.Drawing.Point(6, 29);
+            this.ghostNotes.Name = "ghostNotes";
+            this.ghostNotes.Size = new System.Drawing.Size(85, 17);
+            this.ghostNotes.TabIndex = 20;
+            this.ghostNotes.Text = "Ghost Notes";
+            this.ghostNotes.UseVisualStyleBackColor = true;
+            this.ghostNotes.CheckedChanged += new System.EventHandler(this.ChallengeDataValueChange);
             // 
             // label12
             // 
@@ -346,7 +394,7 @@
             // batteryEnergy
             // 
             this.batteryEnergy.AutoSize = true;
-            this.batteryEnergy.Location = new System.Drawing.Point(6, 167);
+            this.batteryEnergy.Location = new System.Drawing.Point(6, 190);
             this.batteryEnergy.Name = "batteryEnergy";
             this.batteryEnergy.Size = new System.Drawing.Size(95, 17);
             this.batteryEnergy.TabIndex = 9;
@@ -370,7 +418,7 @@
             // noFail
             // 
             this.noFail.AutoSize = true;
-            this.noFail.Location = new System.Drawing.Point(6, 144);
+            this.noFail.Location = new System.Drawing.Point(6, 167);
             this.noFail.Name = "noFail";
             this.noFail.Size = new System.Drawing.Size(59, 17);
             this.noFail.TabIndex = 8;
@@ -381,7 +429,7 @@
             // instaFail
             // 
             this.instaFail.AutoSize = true;
-            this.instaFail.Location = new System.Drawing.Point(6, 121);
+            this.instaFail.Location = new System.Drawing.Point(6, 144);
             this.instaFail.Name = "instaFail";
             this.instaFail.Size = new System.Drawing.Size(77, 17);
             this.instaFail.TabIndex = 7;
@@ -392,7 +440,7 @@
             // failOnSaberClash
             // 
             this.failOnSaberClash.AutoSize = true;
-            this.failOnSaberClash.Location = new System.Drawing.Point(6, 98);
+            this.failOnSaberClash.Location = new System.Drawing.Point(6, 121);
             this.failOnSaberClash.Name = "failOnSaberClash";
             this.failOnSaberClash.Size = new System.Drawing.Size(119, 17);
             this.failOnSaberClash.TabIndex = 6;
@@ -403,7 +451,7 @@
             // noBombs
             // 
             this.noBombs.AutoSize = true;
-            this.noBombs.Location = new System.Drawing.Point(6, 75);
+            this.noBombs.Location = new System.Drawing.Point(6, 98);
             this.noBombs.Name = "noBombs";
             this.noBombs.Size = new System.Drawing.Size(75, 17);
             this.noBombs.TabIndex = 5;
@@ -414,7 +462,7 @@
             // fastNotes
             // 
             this.fastNotes.AutoSize = true;
-            this.fastNotes.Location = new System.Drawing.Point(6, 52);
+            this.fastNotes.Location = new System.Drawing.Point(6, 75);
             this.fastNotes.Name = "fastNotes";
             this.fastNotes.Size = new System.Drawing.Size(77, 17);
             this.fastNotes.TabIndex = 4;
@@ -425,7 +473,7 @@
             // strictAngles
             // 
             this.strictAngles.AutoSize = true;
-            this.strictAngles.Location = new System.Drawing.Point(6, 29);
+            this.strictAngles.Location = new System.Drawing.Point(6, 52);
             this.strictAngles.Name = "strictAngles";
             this.strictAngles.Size = new System.Drawing.Size(85, 17);
             this.strictAngles.TabIndex = 3;
@@ -523,7 +571,10 @@
             "bombsHit",
             "blocksMissed",
             "saberDistance",
-            "perfectCuts"});
+            "perfectCuts",
+            "combo",
+            "fullCombo",
+            "badCuts"});
             this.requirementType.Location = new System.Drawing.Point(141, 32);
             this.requirementType.Name = "requirementType";
             this.requirementType.Size = new System.Drawing.Size(121, 21);
@@ -623,6 +674,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.beatmapCharacteristic);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.difficulty);
@@ -630,9 +683,9 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.songID);
-            this.groupBox1.Location = new System.Drawing.Point(91, 77);
+            this.groupBox1.Location = new System.Drawing.Point(91, 51);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(472, 131);
+            this.groupBox1.Size = new System.Drawing.Size(472, 157);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Song Data";
@@ -706,23 +759,6 @@
             this.songID.TabIndex = 7;
             this.songID.TextChanged += new System.EventHandler(this.ChallengeDataValueChange);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(99, 54);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Challenge Description";
-            // 
-            // challengeDesc
-            // 
-            this.challengeDesc.Location = new System.Drawing.Point(217, 51);
-            this.challengeDesc.Name = "challengeDesc";
-            this.challengeDesc.Size = new System.Drawing.Size(346, 20);
-            this.challengeDesc.TabIndex = 5;
-            this.challengeDesc.TextChanged += new System.EventHandler(this.ChallengeDataValueChange);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -760,19 +796,226 @@
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // folderBrowserDialog1
+            // tabPage6
             // 
-            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            this.tabPage6.Controls.Add(this.moveGates);
+            this.tabPage6.Controls.Add(this.editGates);
+            this.tabPage6.Controls.Add(this.removeGates);
+            this.tabPage6.Controls.Add(this.addGate);
+            this.tabPage6.Controls.Add(this.label19);
+            this.tabPage6.Controls.Add(this.editNode);
+            this.tabPage6.Controls.Add(this.moveNodes);
+            this.tabPage6.Controls.Add(this.disconnectNodes);
+            this.tabPage6.Controls.Add(this.connectNodes);
+            this.tabPage6.Controls.Add(this.mapState);
+            this.tabPage6.Controls.Add(this.addNode);
+            this.tabPage6.Controls.Add(this.groupBox2);
+            this.tabPage6.Controls.Add(this.numericUpDown1);
+            this.tabPage6.Controls.Add(this.label18);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(605, 512);
+            this.tabPage6.TabIndex = 2;
+            this.tabPage6.Text = "Map Editor";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // moveGates
+            // 
+            this.moveGates.Location = new System.Drawing.Point(459, 45);
+            this.moveGates.Name = "moveGates";
+            this.moveGates.Size = new System.Drawing.Size(95, 19);
+            this.moveGates.TabIndex = 31;
+            this.moveGates.Text = "Move Gates";
+            this.moveGates.UseVisualStyleBackColor = true;
+            this.moveGates.Click += new System.EventHandler(this.moveGates_Click);
+            // 
+            // editGates
+            // 
+            this.editGates.Location = new System.Drawing.Point(459, 17);
+            this.editGates.Name = "editGates";
+            this.editGates.Size = new System.Drawing.Size(95, 19);
+            this.editGates.TabIndex = 30;
+            this.editGates.Text = "Edit Gates";
+            this.editGates.UseVisualStyleBackColor = true;
+            this.editGates.Click += new System.EventHandler(this.editGates_Click);
+            // 
+            // removeGates
+            // 
+            this.removeGates.Location = new System.Drawing.Point(358, 45);
+            this.removeGates.Name = "removeGates";
+            this.removeGates.Size = new System.Drawing.Size(95, 19);
+            this.removeGates.TabIndex = 29;
+            this.removeGates.Text = "Remove Gates";
+            this.removeGates.UseVisualStyleBackColor = true;
+            this.removeGates.Click += new System.EventHandler(this.removeGates_Click);
+            // 
+            // addGate
+            // 
+            this.addGate.Location = new System.Drawing.Point(358, 17);
+            this.addGate.Name = "addGate";
+            this.addGate.Size = new System.Drawing.Size(95, 19);
+            this.addGate.TabIndex = 28;
+            this.addGate.Text = "Add Gate";
+            this.addGate.UseVisualStyleBackColor = true;
+            this.addGate.Click += new System.EventHandler(this.addGate_Click);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(333, 116);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(261, 182);
+            this.label19.TabIndex = 27;
+            this.label19.Text = resources.GetString("label19.Text");
+            // 
+            // editNode
+            // 
+            this.editNode.Location = new System.Drawing.Point(218, 45);
+            this.editNode.Name = "editNode";
+            this.editNode.Size = new System.Drawing.Size(107, 19);
+            this.editNode.TabIndex = 26;
+            this.editNode.Text = "Edit Nodes";
+            this.editNode.UseVisualStyleBackColor = true;
+            this.editNode.Click += new System.EventHandler(this.editNode_Click);
+            // 
+            // moveNodes
+            // 
+            this.moveNodes.Location = new System.Drawing.Point(105, 45);
+            this.moveNodes.Name = "moveNodes";
+            this.moveNodes.Size = new System.Drawing.Size(107, 19);
+            this.moveNodes.TabIndex = 25;
+            this.moveNodes.Text = "Move Nodes";
+            this.moveNodes.UseVisualStyleBackColor = true;
+            this.moveNodes.Click += new System.EventHandler(this.moveNodes_Click);
+            // 
+            // disconnectNodes
+            // 
+            this.disconnectNodes.Location = new System.Drawing.Point(218, 17);
+            this.disconnectNodes.Name = "disconnectNodes";
+            this.disconnectNodes.Size = new System.Drawing.Size(107, 19);
+            this.disconnectNodes.TabIndex = 24;
+            this.disconnectNodes.Text = "Disconnect Nodes";
+            this.disconnectNodes.UseVisualStyleBackColor = true;
+            this.disconnectNodes.Click += new System.EventHandler(this.disconnectNodes_Click);
+            // 
+            // connectNodes
+            // 
+            this.connectNodes.Location = new System.Drawing.Point(105, 17);
+            this.connectNodes.Name = "connectNodes";
+            this.connectNodes.Size = new System.Drawing.Size(107, 19);
+            this.connectNodes.TabIndex = 23;
+            this.connectNodes.Text = "Connect Nodes";
+            this.connectNodes.UseVisualStyleBackColor = true;
+            this.connectNodes.Click += new System.EventHandler(this.connectNodes_Click);
+            // 
+            // mapState
+            // 
+            this.mapState.AutoSize = true;
+            this.mapState.Location = new System.Drawing.Point(6, 3);
+            this.mapState.Name = "mapState";
+            this.mapState.Size = new System.Drawing.Size(63, 13);
+            this.mapState.TabIndex = 22;
+            this.mapState.Text = "State: EDIT";
+            // 
+            // addNode
+            // 
+            this.addNode.Location = new System.Drawing.Point(24, 17);
+            this.addNode.Name = "addNode";
+            this.addNode.Size = new System.Drawing.Size(75, 19);
+            this.addNode.TabIndex = 21;
+            this.addNode.Text = "Add A Node";
+            this.addNode.UseVisualStyleBackColor = true;
+            this.addNode.Click += new System.EventHandler(this.addNode_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.panel1);
+            this.groupBox2.Location = new System.Drawing.Point(24, 56);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(304, 450);
+            this.groupBox2.TabIndex = 20;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Map";
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.mapArea);
+            this.panel1.Location = new System.Drawing.Point(6, 23);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(288, 419);
+            this.panel1.TabIndex = 0;
+            // 
+            // mapArea
+            // 
+            this.mapArea.Location = new System.Drawing.Point(3, 3);
+            this.mapArea.Name = "mapArea";
+            this.mapArea.Size = new System.Drawing.Size(282, 171);
+            this.mapArea.TabIndex = 0;
+            this.mapArea.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 1;
+            this.numericUpDown1.Location = new System.Drawing.Point(402, 79);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 19;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(334, 82);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(62, 13);
+            this.label18.TabIndex = 6;
+            this.label18.Text = "Map Height";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 20;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(68, 129);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Characteristic";
+            // 
+            // beatmapCharacteristic
+            // 
+            this.beatmapCharacteristic.FormattingEnabled = true;
+            this.beatmapCharacteristic.Items.AddRange(new object[] {
+            "Standard",
+            "No Arrows",
+            "One Saber"});
+            this.beatmapCharacteristic.Location = new System.Drawing.Point(144, 126);
+            this.beatmapCharacteristic.Name = "beatmapCharacteristic";
+            this.beatmapCharacteristic.Size = new System.Drawing.Size(121, 21);
+            this.beatmapCharacteristic.TabIndex = 14;
+            this.beatmapCharacteristic.SelectedIndexChanged += new System.EventHandler(this.ChallengeDataValueChange);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 587);
+            this.ClientSize = new System.Drawing.Size(650, 587);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Form1";
             this.Text = "Campaign Creator";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -791,6 +1034,11 @@
             this.tabPage5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -812,12 +1060,9 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox challengeDesc;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox challengeName;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.CheckBox allUnlocked;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label8;
@@ -860,6 +1105,28 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel mapArea;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button addNode;
+        private System.Windows.Forms.Label mapState;
+        private System.Windows.Forms.Button connectNodes;
+        private System.Windows.Forms.Button disconnectNodes;
+        private System.Windows.Forms.Button editNode;
+        private System.Windows.Forms.Button moveNodes;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox noArrows;
+        private System.Windows.Forms.CheckBox ghostNotes;
+        private System.Windows.Forms.Button editGates;
+        private System.Windows.Forms.Button removeGates;
+        private System.Windows.Forms.Button addGate;
+        private System.Windows.Forms.Button moveGates;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox beatmapCharacteristic;
     }
 }
 
