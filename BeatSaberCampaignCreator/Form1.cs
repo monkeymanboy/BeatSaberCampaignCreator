@@ -17,7 +17,6 @@ namespace BeatSaberCampaignCreator
 {
     public partial class Form1 : Form
     {
-
         Ookii.Dialogs.Wpf.VistaFolderBrowserDialog folderBrowserDialog1;
         Campaign campaign = null;
         string currentDirectory;
@@ -71,7 +70,7 @@ namespace BeatSaberCampaignCreator
             speedMul.Value = (decimal)challenge.modifiers.speedMul;
             energyType.SelectedIndex = (int)challenge.modifiers.energyType;
             enabledObstacles.SelectedIndex = (int)challenge.modifiers.enabledObstacleType;
-
+            songUnlockable.Checked = challenge.unlockMap;
 
             reqList.Items.Clear();
             foreach(ChallengeRequirement req in challenge.requirements)
@@ -85,6 +84,13 @@ namespace BeatSaberCampaignCreator
                 externalModsList.Items.Add(pair.Key);
             }
             if (externalModsList.Items.Count > 0) externalModsList.SelectedIndex = 0;
+
+            unlockableListBox.Items.Clear();
+            foreach (UnlockableItem req in challenge.unlockableItems)
+            {
+                unlockableListBox.Items.Add(unlockableListBox.Items.Count);
+            }
+            if (unlockableListBox.Items.Count > 0) unlockableListBox.SelectedIndex = 0;
             isExtLoading = true;
             textBox1.Text = "";
             isExtLoading = false;
@@ -122,6 +128,7 @@ namespace BeatSaberCampaignCreator
             challenge.modifiers.speedMul = (float)speedMul.Value;
             challenge.modifiers.energyType = (GameplayModifiers.EnergyType)energyType.SelectedIndex;
             challenge.modifiers.enabledObstacleType = (GameplayModifiers.EnabledObstacleType)enabledObstacles.SelectedIndex;
+            challenge.unlockMap = songUnlockable.Checked;
         }
         bool updatingCampaign = false;
         public void SetCampaignInfoData()
@@ -589,6 +596,60 @@ namespace BeatSaberCampaignCreator
         {
         
             folderBrowserDialog1 = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+        }
+        //Unlockable stuff
+        int curUnlockableIndex;
+        bool unlockableUpdating = false;
+        private void addUnlockable_Click(object sender, EventArgs e)
+        {
+            unlockableListBox.Items.Add(unlockableListBox.Items.Count);
+            Challenge challenge = campaign.challenges[currentChallenge];
+            challenge.unlockableItems.Add(new UnlockableItem());
+        }
+
+        private void removeUnlockable_Click(object sender, EventArgs e)
+        {
+            Challenge challenge = campaign.challenges[currentChallenge];
+            challenge.unlockableItems.RemoveAt(curUnlockableIndex);
+            unlockableListBox.Items.Clear();
+            foreach (UnlockableItem req in challenge.unlockableItems)
+            {
+                unlockableListBox.Items.Add(unlockableListBox.Items.Count);
+            }
+            if (unlockableListBox.Items.Count > 0) unlockableListBox.SelectedIndex = 0;
+        }
+
+        private void unlockableListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            curUnlockableIndex = unlockableListBox.SelectedIndex;
+            SetUnlockableToSelected();
+        }
+        private void UnlockableValueChanged(object sender, EventArgs e)
+        {
+            if (unlockableUpdating) return;
+            UpdateUnlockableInfo();
+        }
+        public void UpdateUnlockableInfo()
+        {
+            if (campaign == null) return;
+            Challenge challenge = campaign.challenges[currentChallenge];
+            if (challenge.unlockableItems.Count() == 0 || curUnlockableIndex >= challenge.unlockableItems.Count()) return;
+            UnlockableItem unlockable = challenge.unlockableItems[curUnlockableIndex];
+            unlockable.fileName = unlockableFile.Text;
+            unlockable.name = unlockableName.Text;
+            unlockable.type = (UnlockableType)unlockableType.SelectedIndex;
+        }
+        public void SetUnlockableToSelected()
+        {
+            if (campaign == null) return;
+            Challenge challenge = campaign.challenges[currentChallenge];
+            if (challenge.unlockableItems.Count() == 0 || curUnlockableIndex >= challenge.unlockableItems.Count()) return;
+            unlockableUpdating = true;
+            UnlockableItem unlockable = challenge.unlockableItems[curUnlockableIndex];
+            unlockableFile.Text = unlockable.fileName;
+            unlockableName.Text = unlockable.name;
+            unlockableType.SelectedIndex = (int)unlockable.type;
+            unlockableUpdating = false;
         }
     }
 }
