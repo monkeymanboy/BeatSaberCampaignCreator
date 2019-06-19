@@ -112,7 +112,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label25 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.backgroundAlpha = new System.Windows.Forms.NumericUpDown();
+            this.label24 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.moveGates = new System.Windows.Forms.Button();
@@ -130,9 +133,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.mapArea = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label24 = new System.Windows.Forms.Label();
-            this.backgroundAlpha = new System.Windows.Forms.NumericUpDown();
-            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -153,10 +154,10 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.backgroundAlpha)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -308,6 +309,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label26);
             this.tabPage2.Controls.Add(this.tableLayoutPanel6);
             this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.tabControl2);
@@ -986,11 +988,11 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label6.Location = new System.Drawing.Point(53, 0);
+            this.label6.Location = new System.Drawing.Point(80, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 22);
+            this.label6.Size = new System.Drawing.Size(53, 22);
             this.label6.TabIndex = 8;
-            this.label6.Text = "Song Version #";
+            this.label6.Text = "Song Key";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label5
@@ -1017,8 +1019,8 @@
             this.beatmapCharacteristic.FormattingEnabled = true;
             this.beatmapCharacteristic.Items.AddRange(new object[] {
             "Standard",
-            "No Arrows",
-            "One Saber"});
+            "NoArrows",
+            "OneSaber"});
             this.beatmapCharacteristic.Location = new System.Drawing.Point(139, 75);
             this.beatmapCharacteristic.Name = "beatmapCharacteristic";
             this.beatmapCharacteristic.Size = new System.Drawing.Size(121, 21);
@@ -1077,7 +1079,7 @@
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(84, 8);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(388, 36);
+            this.label9.Size = new System.Drawing.Size(339, 36);
             this.label9.TabIndex = 13;
             this.label9.Text = resources.GetString("label9.Text");
             // 
@@ -1125,6 +1127,15 @@
             this.tabPage6.Text = "Map Editor";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(351, 169);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(269, 26);
+            this.label25.TabIndex = 33;
+            this.label25.Text = "If you want a background put a \"map background.png\"\r\nin the campaign\'s folder";
+            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
@@ -1141,6 +1152,30 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 60);
             this.tableLayoutPanel4.TabIndex = 32;
+            // 
+            // backgroundAlpha
+            // 
+            this.backgroundAlpha.DecimalPlaces = 2;
+            this.backgroundAlpha.Location = new System.Drawing.Point(103, 34);
+            this.backgroundAlpha.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.backgroundAlpha.Name = "backgroundAlpha";
+            this.backgroundAlpha.Size = new System.Drawing.Size(94, 20);
+            this.backgroundAlpha.TabIndex = 21;
+            this.backgroundAlpha.ValueChanged += new System.EventHandler(this.CampaignDataValueChange);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label24.Location = new System.Drawing.Point(25, 31);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(72, 29);
+            this.label24.TabIndex = 20;
+            this.label24.Text = "Background Transparency";
             // 
             // label18
             // 
@@ -1307,38 +1342,16 @@
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label24
+            // label26
             // 
-            this.label24.AutoSize = true;
-            this.label24.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label24.Location = new System.Drawing.Point(25, 31);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(72, 29);
-            this.label24.TabIndex = 20;
-            this.label24.Text = "Background Transparency";
-            // 
-            // backgroundAlpha
-            // 
-            this.backgroundAlpha.DecimalPlaces = 2;
-            this.backgroundAlpha.Location = new System.Drawing.Point(103, 34);
-            this.backgroundAlpha.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.backgroundAlpha.Name = "backgroundAlpha";
-            this.backgroundAlpha.Size = new System.Drawing.Size(94, 20);
-            this.backgroundAlpha.TabIndex = 21;
-            this.backgroundAlpha.ValueChanged += new System.EventHandler(this.CampaignDataValueChange);
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(351, 169);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(269, 26);
-            this.label25.TabIndex = 33;
-            this.label25.Text = "If you want a background put a \"map background.png\"\r\nin the campaign\'s folder";
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.DimGray;
+            this.label26.Location = new System.Drawing.Point(332, 135);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(199, 9);
+            this.label26.TabIndex = 17;
+            this.label26.Text = "IF THE SONG IS ON BEATSAVER LEAVE THIS BLANK";
             // 
             // Form1
             // 
@@ -1386,10 +1399,10 @@
             this.tabPage6.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.backgroundAlpha)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1500,6 +1513,7 @@
         private System.Windows.Forms.NumericUpDown backgroundAlpha;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
     }
 }
 

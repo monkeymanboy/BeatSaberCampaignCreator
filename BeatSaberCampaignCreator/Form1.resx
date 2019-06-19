@@ -136,6 +136,11 @@
         TgDQASA1MVpwzwAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>If you don't use a custom download url then just put the song's key from beatsaver
+in key. If you do you need to make Song Version # something unique as this is how
+the plugin finds the song as well as being the name of the folder it puts it in.</value>
+  </data>
   <data name="label19.Text" xml:space="preserve">
     <value>The number on a given node corresponds to the
 challenge number that it is.
@@ -151,11 +156,6 @@ Unlock gates prevent the player from playing any
 challenges ABOVE the unlock gate until they have
 completed the number of challenges required for
 that gate</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>If you don't use a custom download url then just put the song's version number from beatsaver
-in song version #. If you do you need to make Song Version # something unique as this is how
-the plugin finds the song as well as being the name of the folder it puts it in.</value>
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>460, 17</value>
