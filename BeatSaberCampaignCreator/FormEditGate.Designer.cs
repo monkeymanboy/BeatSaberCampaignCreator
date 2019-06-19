@@ -62,14 +62,14 @@
             // 
             // FormEditGate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(534, 247);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.clearsToPass);
             this.Name = "FormEditGate";
-            this.Text = "FormEditGate";
+            this.Text = "Edit Gate";
             this.Load += new System.EventHandler(this.FormEditGate_Load);
             ((System.ComponentModel.ISupportInitialize)(this.clearsToPass)).EndInit();
             this.ResumeLayout(false);

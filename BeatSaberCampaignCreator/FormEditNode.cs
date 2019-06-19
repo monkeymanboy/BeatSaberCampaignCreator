@@ -1,4 +1,4 @@
-﻿using BeatSaberDailyChallenges.campaign;
+﻿using BeatSaberCustomCampaigns.campaign;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +13,14 @@ namespace BeatSaberCampaignCreator
 {
     public partial class FormEditNode : Form
     {
+        const int CENTER_OFFSET = 121;
         public CampainMapPosition mapPosition;
-        public FormEditNode(CampainMapPosition mapPosition)
+        public NodeButton nodeButton;
+        public FormEditNode(NodeButton nodeButton)
         {
             InitializeComponent();
-            this.mapPosition = mapPosition;
+            this.mapPosition = nodeButton.mapPosition;
+            this.nodeButton = nodeButton;
         }
 
         private void FormEditNode_Load(object sender, EventArgs e)
@@ -25,6 +28,8 @@ namespace BeatSaberCampaignCreator
             nodeScale.Value = (decimal)mapPosition.scale;
             numberPortion.Value = mapPosition.numberPortion;
             letterPortion.Text = mapPosition.letterPortion;
+            xPositon.Value = nodeButton.Location.X- CENTER_OFFSET;
+            yPosition.Value = nodeButton.Location.Y;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,6 +37,7 @@ namespace BeatSaberCampaignCreator
             mapPosition.scale = (float)nodeScale.Value;
             mapPosition.numberPortion = (int)numberPortion.Value;
             mapPosition.letterPortion = letterPortion.Text;
+            nodeButton.SetPosition(new Point((int)xPositon.Value+CENTER_OFFSET, (int)yPosition.Value));
             Close();
         }
     }

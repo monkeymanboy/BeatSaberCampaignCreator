@@ -1,4 +1,4 @@
-﻿using BeatSaberDailyChallenges.campaign;
+﻿using BeatSaberCustomCampaigns.campaign;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

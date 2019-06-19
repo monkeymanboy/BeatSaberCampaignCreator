@@ -130,6 +130,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.mapArea = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label24 = new System.Windows.Forms.Label();
+            this.backgroundAlpha = new System.Windows.Forms.NumericUpDown();
+            this.label25 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -153,6 +156,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundAlpha)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -878,7 +882,8 @@
             this.unlockableType.Items.AddRange(new object[] {
             "Saber",
             "Avatar",
-            "Platform"});
+            "Platform",
+            "Note"});
             this.unlockableType.Location = new System.Drawing.Point(67, 3);
             this.unlockableType.Name = "unlockableType";
             this.unlockableType.Size = new System.Drawing.Size(126, 21);
@@ -1098,6 +1103,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.label25);
             this.tabPage6.Controls.Add(this.tableLayoutPanel4);
             this.tabPage6.Controls.Add(this.moveGates);
             this.tabPage6.Controls.Add(this.editGates);
@@ -1124,13 +1130,16 @@
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.backgroundAlpha, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label24, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.label18, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.numericUpDown1, 1, 0);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(354, 106);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 27);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 60);
             this.tableLayoutPanel4.TabIndex = 32;
             // 
             // label18
@@ -1139,7 +1148,7 @@
             this.label18.Dock = System.Windows.Forms.DockStyle.Right;
             this.label18.Location = new System.Drawing.Point(35, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(62, 27);
+            this.label18.Size = new System.Drawing.Size(62, 31);
             this.label18.TabIndex = 6;
             this.label18.Text = "Map Height";
             // 
@@ -1200,7 +1209,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(333, 136);
+            this.label19.Location = new System.Drawing.Point(351, 229);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(261, 182);
             this.label19.TabIndex = 27;
@@ -1298,10 +1307,43 @@
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label24.Location = new System.Drawing.Point(25, 31);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(72, 29);
+            this.label24.TabIndex = 20;
+            this.label24.Text = "Background Transparency";
+            // 
+            // backgroundAlpha
+            // 
+            this.backgroundAlpha.DecimalPlaces = 2;
+            this.backgroundAlpha.Location = new System.Drawing.Point(103, 34);
+            this.backgroundAlpha.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.backgroundAlpha.Name = "backgroundAlpha";
+            this.backgroundAlpha.Size = new System.Drawing.Size(94, 20);
+            this.backgroundAlpha.TabIndex = 21;
+            this.backgroundAlpha.ValueChanged += new System.EventHandler(this.CampaignDataValueChange);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(351, 169);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(269, 26);
+            this.label25.TabIndex = 33;
+            this.label25.Text = "If you want a background put a \"map background.png\"\r\nin the campaign\'s folder";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(650, 587);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
@@ -1347,6 +1389,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundAlpha)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1454,6 +1497,9 @@
         private System.Windows.Forms.Button removeUnlockable;
         private System.Windows.Forms.ListBox unlockableListBox;
         private System.Windows.Forms.Button addUnlockable;
+        private System.Windows.Forms.NumericUpDown backgroundAlpha;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
     }
 }
 

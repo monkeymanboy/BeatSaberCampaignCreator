@@ -1,5 +1,5 @@
-﻿using BeatSaberDailyChallenges;
-using BeatSaberDailyChallenges.campaign;
+﻿using BeatSaberCustomCampaigns;
+using BeatSaberCustomCampaigns.campaign;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,10 +8,10 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static PlayerDataModelSaveData.GameplayModifiers;
 
 namespace BeatSaberCampaignCreator
 {
@@ -19,6 +19,7 @@ namespace BeatSaberCampaignCreator
     {
         Ookii.Dialogs.Wpf.VistaFolderBrowserDialog folderBrowserDialog1;
         Campaign campaign = null;
+        Bitmap backgroundBitmap = null;
         string currentDirectory;
         int currentChallenge = 0;
         bool isLoading = false;
@@ -138,6 +139,7 @@ namespace BeatSaberCampaignCreator
             campaignDesc.Text = campaign.info.desc;
             allUnlocked.Checked = campaign.info.allUnlocked;
             numericUpDown1.Value = campaign.info.mapHeight;
+            backgroundAlpha.Value = (decimal)campaign.info.backgroundAlpha;
             updatingCampaign = false;
         }
         public void UpdateCampaignInfo()
@@ -145,6 +147,7 @@ namespace BeatSaberCampaignCreator
             campaign.info.name = campaignName.Text;
             campaign.info.desc = campaignDesc.Text;
             campaign.info.allUnlocked = allUnlocked.Checked;
+            campaign.info.backgroundAlpha = (float)backgroundAlpha.Value;
         }
 
         //Header
@@ -152,11 +155,12 @@ namespace BeatSaberCampaignCreator
         {
             if (folderBrowserDialog1.ShowDialog().Value)
             {
+                Location = new Point(Location.X+1, Location.Y);
                 string path = folderBrowserDialog1.SelectedPath;
                 currentDirectory = path;
                 campaign = new Campaign();
                 campaign.info = new CampaignInfo();
-                campaign.challenges = new List<BeatSaberDailyChallenges.Challenge>();
+                campaign.challenges = new List<Challenge>();
                 listBox1.Items.Clear();
                 AddChallenge();
                 currentChallenge = 0;
@@ -171,11 +175,12 @@ namespace BeatSaberCampaignCreator
         {
             if (folderBrowserDialog1.ShowDialog().Value)
             {
+                Location = new Point(Location.X + 1, Location.Y);
                 string path = folderBrowserDialog1.SelectedPath;
                 currentDirectory = path;
                 campaign = new Campaign();
                 campaign.info = JsonConvert.DeserializeObject<CampaignInfo>(File.ReadAllText(path + "/info.json"));
-                campaign.challenges = new List<BeatSaberDailyChallenges.Challenge>();
+                campaign.challenges = new List<Challenge>();
                 currentChallenge = 0;
                 int i = 0;
                 listBox1.Items.Clear();
@@ -190,6 +195,13 @@ namespace BeatSaberCampaignCreator
                 SetRequirementToSelected();
                 PrepareMap();
                 tabControl1.Enabled = true;
+                if (File.Exists(path + "/map background.png"))
+                {
+                    backgroundBitmap = new Bitmap(path + "/map background.png");
+                } else
+                {
+                    backgroundBitmap = null;
+                }
             }
         }
 
@@ -375,10 +387,16 @@ namespace BeatSaberCampaignCreator
         }
 
         Pen pen = new Pen(Brushes.Red, 8);
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             //Draw arrows
             Graphics g = e.Graphics;
+            if (backgroundBitmap != null)
+            {
+                int renderedHeight = mapArea.Width * backgroundBitmap.Height / backgroundBitmap.Width;
+                g.DrawImage(backgroundBitmap, 0, mapArea.Height-renderedHeight, mapArea.Width, renderedHeight);
+            }
             pen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             foreach(NodeButton node in nodes)
             {
@@ -495,7 +513,7 @@ namespace BeatSaberCampaignCreator
                     setState(MapState.MOVE);
                     break;
                 case MapState.EDIT:
-                    new FormEditNode(((NodeButton)sender).mapPosition).ShowDialog();
+                    new FormEditNode(((NodeButton)sender)).ShowDialog();
                     break;
             }
         }
@@ -591,11 +609,11 @@ namespace BeatSaberCampaignCreator
             if (!CanSwitchState()) return;
             setState(MapState.MOVE_GATES);
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
         
             folderBrowserDialog1 = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty, null, mapArea, new object[] { true });
         }
         //Unlockable stuff
         int curUnlockableIndex;
