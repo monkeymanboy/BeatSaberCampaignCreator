@@ -15,6 +15,11 @@ Place an image called `map background.png` in the folder for your campaign size 
 The width will be stretched to fit the map area and the height will be adjusted to retain aspect ratio
 
 ## Unlockable Items
+Create a folder inside your campaign folder called `unlockables` and just place what you want to get unlocked in here
+
+When adding unlockables to maps ensure that you include the file extension
+
+## Unlockable Songs
 After checking unlockable song on a given challenge you need to have the map specifically set up for the song to be unlocked
 
 Just add `Complete Campaign Challenge - challenge name` to the requirements field of the map, you can either do this for some or all difficulties just keep in mind the ones without this requirement will always be unlocked
