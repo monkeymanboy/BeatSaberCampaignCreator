@@ -386,11 +386,10 @@ namespace BeatSaberCampaignCreator
             mapArea.Height = height;
         }
 
-        Pen pen = new Pen(Brushes.Red, 8);
+        Pen pen = new Pen(Brushes.Red, 5);
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            //Draw arrows
             Graphics g = e.Graphics;
             if (backgroundBitmap != null)
             {
@@ -402,7 +401,9 @@ namespace BeatSaberCampaignCreator
             {
                 foreach(NodeButton childNode in node.children)
                 {
-                    g.DrawLine(pen, childNode.Location.X+childNode.Width/2, childNode.Location.Y + childNode.Height / 2, node.Location.X + node.Width / 2, node.Location.Y + node.Width / 2);
+                    int closestPointX = Math.Max(childNode.Location.X - childNode.Width / 2, Math.Min(node.Location.X, childNode.Location.X + childNode.Width / 2));
+                    int closestPointY = Math.Max(childNode.Location.Y - childNode.Height / 2, Math.Min(node.Location.Y, childNode.Location.Y + childNode.Height / 2));
+                    g.DrawLine(pen, closestPointX+childNode.Width/2, closestPointY + childNode.Height / 2, node.Location.X + node.Width / 2, node.Location.Y + node.Height / 2);
                 }
             }
         }
