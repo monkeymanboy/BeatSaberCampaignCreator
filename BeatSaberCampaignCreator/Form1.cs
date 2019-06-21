@@ -378,12 +378,28 @@ namespace BeatSaberCampaignCreator
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (updatingCampaign) return;
+            int dist = (int)numericUpDown1.Value - campaign.info.mapHeight;
             UpdateMapHeight((int)numericUpDown1.Value);
+            MoveEverything(dist);
         }
         public void UpdateMapHeight(int height)
         {
             campaign.info.mapHeight = height;
             mapArea.Height = height;
+        }
+        public void MoveEverything(int dist)
+        {
+            foreach(Control control in mapArea.Controls)
+            {
+                if (control is GateButton)
+                {
+                    (control as GateButton).SetPosition(new Point(control.Location.X, control.Location.Y + dist));
+                }
+                if (control is NodeButton)
+                {
+                    (control as NodeButton).SetPosition(new Point(control.Location.X, control.Location.Y + dist));
+                }
+            }
         }
 
         Pen pen = new Pen(Brushes.Red, 5);
