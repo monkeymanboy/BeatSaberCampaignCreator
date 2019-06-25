@@ -45,6 +45,7 @@
             this.allUnlocked = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label26 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label20 = new System.Windows.Forms.Label();
             this.challengeName = new System.Windows.Forms.TextBox();
@@ -133,7 +134,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.mapArea = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label26 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -323,6 +323,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Challenges";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.DimGray;
+            this.label26.Location = new System.Drawing.Point(332, 135);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(199, 9);
+            this.label26.TabIndex = 17;
+            this.label26.Text = "IF THE SONG IS ON BEATSAVER LEAVE THIS BLANK";
             // 
             // tableLayoutPanel6
             // 
@@ -635,6 +646,7 @@
             // 
             // requirementType
             // 
+            this.requirementType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.requirementType.FormattingEnabled = true;
             this.requirementType.Items.AddRange(new object[] {
             "score",
@@ -644,7 +656,8 @@
             "perfectCuts",
             "combo",
             "fullCombo",
-            "badCuts"});
+            "badCuts",
+            "timeInWall"});
             this.requirementType.Location = new System.Drawing.Point(103, 3);
             this.requirementType.Name = "requirementType";
             this.requirementType.Size = new System.Drawing.Size(94, 21);
@@ -1341,17 +1354,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.DimGray;
-            this.label26.Location = new System.Drawing.Point(332, 135);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(199, 9);
-            this.label26.TabIndex = 17;
-            this.label26.Text = "IF THE SONG IS ON BEATSAVER LEAVE THIS BLANK";
             // 
             // Form1
             // 
