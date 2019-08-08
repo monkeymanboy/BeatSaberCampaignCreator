@@ -137,6 +137,7 @@ namespace BeatSaberCampaignCreator
             updatingCampaign = true;
             campaignName.Text = campaign.info.name;
             campaignDesc.Text = campaign.info.desc;
+            bigDesc.Text = campaign.info.bigDesc;
             allUnlocked.Checked = campaign.info.allUnlocked;
             numericUpDown1.Value = campaign.info.mapHeight;
             backgroundAlpha.Value = (decimal)campaign.info.backgroundAlpha;
@@ -146,6 +147,7 @@ namespace BeatSaberCampaignCreator
         {
             campaign.info.name = campaignName.Text;
             campaign.info.desc = campaignDesc.Text;
+            campaign.info.bigDesc = bigDesc.Text;
             campaign.info.allUnlocked = allUnlocked.Checked;
             campaign.info.backgroundAlpha = (float)backgroundAlpha.Value;
         }

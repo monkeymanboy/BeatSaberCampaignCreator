@@ -134,6 +134,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.mapArea = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.bigDesc = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -235,16 +237,19 @@
             this.tableLayoutPanel5.ColumnCount = 2;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.5F));
+            this.tableLayoutPanel5.Controls.Add(this.label27, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.bigDesc, 1, 2);
             this.tableLayoutPanel5.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.campaignName, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.campaignDesc, 1, 1);
             this.tableLayoutPanel5.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(105, 46);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowCount = 3;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(365, 71);
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 217F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(365, 287);
             this.tableLayoutPanel5.TabIndex = 5;
             // 
             // label2
@@ -280,7 +285,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Right;
             this.label3.Location = new System.Drawing.Point(45, 35);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 36);
+            this.label3.Size = new System.Drawing.Size(110, 35);
             this.label3.TabIndex = 4;
             this.label3.Text = "Campaign Description";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -288,7 +293,7 @@
             // allUnlocked
             // 
             this.allUnlocked.AutoSize = true;
-            this.allUnlocked.Location = new System.Drawing.Point(105, 117);
+            this.allUnlocked.Location = new System.Drawing.Point(105, 339);
             this.allUnlocked.Name = "allUnlocked";
             this.allUnlocked.Size = new System.Drawing.Size(409, 17);
             this.allUnlocked.TabIndex = 2;
@@ -1356,6 +1361,26 @@
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // bigDesc
+            // 
+            this.bigDesc.Location = new System.Drawing.Point(161, 73);
+            this.bigDesc.Multiline = true;
+            this.bigDesc.Name = "bigDesc";
+            this.bigDesc.Size = new System.Drawing.Size(201, 211);
+            this.bigDesc.TabIndex = 6;
+            this.bigDesc.TextChanged += new System.EventHandler(this.CampaignDataValueChange);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label27.Location = new System.Drawing.Point(65, 70);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(90, 217);
+            this.label27.TabIndex = 7;
+            this.label27.Text = "Large Description";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1517,6 +1542,8 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox bigDesc;
     }
 }
 
