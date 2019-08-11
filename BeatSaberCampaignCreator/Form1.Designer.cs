@@ -38,6 +38,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label27 = new System.Windows.Forms.Label();
+            this.bigDesc = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.campaignName = new System.Windows.Forms.TextBox();
             this.campaignDesc = new System.Windows.Forms.TextBox();
@@ -99,6 +101,20 @@
             this.removeUnlockable = new System.Windows.Forms.Button();
             this.unlockableListBox = new System.Windows.Forms.ListBox();
             this.addUnlockable = new System.Windows.Forms.Button();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.label30 = new System.Windows.Forms.Label();
+            this.infoTitle = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelWhatever = new System.Windows.Forms.Label();
+            this.infoText = new System.Windows.Forms.TextBox();
+            this.label234 = new System.Windows.Forms.Label();
+            this.infoImageName = new System.Windows.Forms.TextBox();
+            this.hasSeperator = new System.Windows.Forms.CheckBox();
+            this.removeSegment = new System.Windows.Forms.Button();
+            this.addSegment = new System.Windows.Forms.Button();
+            this.segments = new System.Windows.Forms.ListBox();
+            this.infoEnabled = new System.Windows.Forms.CheckBox();
+            this.appearsEverytime = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
@@ -134,8 +150,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.mapArea = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.bigDesc = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -152,6 +166,8 @@
             this.tabPage5.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -251,6 +267,26 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 217F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(365, 287);
             this.tableLayoutPanel5.TabIndex = 5;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label27.Location = new System.Drawing.Point(65, 70);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(90, 217);
+            this.label27.TabIndex = 7;
+            this.label27.Text = "Large Description";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // bigDesc
+            // 
+            this.bigDesc.Location = new System.Drawing.Point(161, 73);
+            this.bigDesc.Multiline = true;
+            this.bigDesc.Name = "bigDesc";
+            this.bigDesc.Size = new System.Drawing.Size(201, 211);
+            this.bigDesc.TabIndex = 6;
+            this.bigDesc.TextChanged += new System.EventHandler(this.CampaignDataValueChange);
             // 
             // label2
             // 
@@ -388,6 +424,7 @@
             this.tabControl2.Controls.Add(this.tabPage4);
             this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Controls.Add(this.tabPage7);
+            this.tabControl2.Controls.Add(this.tabPage8);
             this.tabControl2.Location = new System.Drawing.Point(92, 215);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
@@ -969,6 +1006,163 @@
             this.addUnlockable.UseVisualStyleBackColor = true;
             this.addUnlockable.Click += new System.EventHandler(this.addUnlockable_Click);
             // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.label30);
+            this.tabPage8.Controls.Add(this.infoTitle);
+            this.tabPage8.Controls.Add(this.tableLayoutPanel8);
+            this.tabPage8.Controls.Add(this.hasSeperator);
+            this.tabPage8.Controls.Add(this.removeSegment);
+            this.tabPage8.Controls.Add(this.addSegment);
+            this.tabPage8.Controls.Add(this.segments);
+            this.tabPage8.Controls.Add(this.infoEnabled);
+            this.tabPage8.Controls.Add(this.appearsEverytime);
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(457, 256);
+            this.tabPage8.TabIndex = 4;
+            this.tabPage8.Text = "Info";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(39, 51);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(27, 13);
+            this.label30.TabIndex = 19;
+            this.label30.Text = "Title";
+            // 
+            // infoTitle
+            // 
+            this.infoTitle.Location = new System.Drawing.Point(11, 67);
+            this.infoTitle.Name = "infoTitle";
+            this.infoTitle.Size = new System.Drawing.Size(79, 20);
+            this.infoTitle.TabIndex = 18;
+            this.infoTitle.TextChanged += new System.EventHandler(this.InfoValueChanged);
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 2;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.45695F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.54305F));
+            this.tableLayoutPanel8.Controls.Add(this.labelWhatever, 0, 1);
+            this.tableLayoutPanel8.Controls.Add(this.infoText, 1, 1);
+            this.tableLayoutPanel8.Controls.Add(this.label234, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.infoImageName, 1, 0);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(131, 36);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 2;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 151F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(302, 179);
+            this.tableLayoutPanel8.TabIndex = 16;
+            // 
+            // labelWhatever
+            // 
+            this.labelWhatever.AutoSize = true;
+            this.labelWhatever.Dock = System.Windows.Forms.DockStyle.Right;
+            this.labelWhatever.Location = new System.Drawing.Point(63, 28);
+            this.labelWhatever.Name = "labelWhatever";
+            this.labelWhatever.Size = new System.Drawing.Size(28, 151);
+            this.labelWhatever.TabIndex = 18;
+            this.labelWhatever.Text = "Text";
+            this.labelWhatever.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // infoText
+            // 
+            this.infoText.Location = new System.Drawing.Point(97, 31);
+            this.infoText.Multiline = true;
+            this.infoText.Name = "infoText";
+            this.infoText.Size = new System.Drawing.Size(202, 145);
+            this.infoText.TabIndex = 17;
+            this.infoText.TextChanged += new System.EventHandler(this.SegmentValueChanged);
+            // 
+            // label234
+            // 
+            this.label234.AutoSize = true;
+            this.label234.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label234.Location = new System.Drawing.Point(5, 0);
+            this.label234.Name = "label234";
+            this.label234.Size = new System.Drawing.Size(86, 28);
+            this.label234.TabIndex = 5;
+            this.label234.Text = "Image File Name";
+            this.label234.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // infoImageName
+            // 
+            this.infoImageName.Location = new System.Drawing.Point(97, 3);
+            this.infoImageName.Name = "infoImageName";
+            this.infoImageName.Size = new System.Drawing.Size(202, 20);
+            this.infoImageName.TabIndex = 3;
+            this.infoImageName.TextChanged += new System.EventHandler(this.SegmentValueChanged);
+            // 
+            // hasSeperator
+            // 
+            this.hasSeperator.AutoSize = true;
+            this.hasSeperator.Location = new System.Drawing.Point(192, 16);
+            this.hasSeperator.Name = "hasSeperator";
+            this.hasSeperator.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.hasSeperator.Size = new System.Drawing.Size(94, 17);
+            this.hasSeperator.TabIndex = 9;
+            this.hasSeperator.Text = "Has Seperator";
+            this.hasSeperator.UseVisualStyleBackColor = true;
+            this.hasSeperator.CheckedChanged += new System.EventHandler(this.SegmentValueChanged);
+            // 
+            // removeSegment
+            // 
+            this.removeSegment.Location = new System.Drawing.Point(11, 93);
+            this.removeSegment.Name = "removeSegment";
+            this.removeSegment.Size = new System.Drawing.Size(29, 20);
+            this.removeSegment.TabIndex = 8;
+            this.removeSegment.Text = "-";
+            this.removeSegment.UseVisualStyleBackColor = true;
+            this.removeSegment.Click += new System.EventHandler(this.removeSegment_Click);
+            // 
+            // addSegment
+            // 
+            this.addSegment.Location = new System.Drawing.Point(61, 93);
+            this.addSegment.Name = "addSegment";
+            this.addSegment.Size = new System.Drawing.Size(29, 20);
+            this.addSegment.TabIndex = 7;
+            this.addSegment.Text = "+";
+            this.addSegment.UseVisualStyleBackColor = true;
+            this.addSegment.Click += new System.EventHandler(this.addSegment_Click);
+            // 
+            // segments
+            // 
+            this.segments.DisplayMember = "1";
+            this.segments.FormattingEnabled = true;
+            this.segments.Location = new System.Drawing.Point(11, 114);
+            this.segments.Name = "segments";
+            this.segments.Size = new System.Drawing.Size(79, 134);
+            this.segments.TabIndex = 6;
+            this.segments.SelectedIndexChanged += new System.EventHandler(this.segments_SelectedIndexChanged);
+            // 
+            // infoEnabled
+            // 
+            this.infoEnabled.AutoSize = true;
+            this.infoEnabled.Location = new System.Drawing.Point(11, 6);
+            this.infoEnabled.Name = "infoEnabled";
+            this.infoEnabled.Size = new System.Drawing.Size(86, 17);
+            this.infoEnabled.TabIndex = 1;
+            this.infoEnabled.Text = "Info Enabled";
+            this.infoEnabled.UseVisualStyleBackColor = true;
+            this.infoEnabled.CheckedChanged += new System.EventHandler(this.infoEnabled_CheckedChanged);
+            // 
+            // appearsEverytime
+            // 
+            this.appearsEverytime.AutoSize = true;
+            this.appearsEverytime.Location = new System.Drawing.Point(11, 29);
+            this.appearsEverytime.Name = "appearsEverytime";
+            this.appearsEverytime.Size = new System.Drawing.Size(114, 17);
+            this.appearsEverytime.TabIndex = 0;
+            this.appearsEverytime.Text = "Appears Everytime";
+            this.appearsEverytime.UseVisualStyleBackColor = true;
+            this.appearsEverytime.CheckedChanged += new System.EventHandler(this.InfoValueChanged);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
@@ -1361,26 +1555,6 @@
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // bigDesc
-            // 
-            this.bigDesc.Location = new System.Drawing.Point(161, 73);
-            this.bigDesc.Multiline = true;
-            this.bigDesc.Name = "bigDesc";
-            this.bigDesc.Size = new System.Drawing.Size(201, 211);
-            this.bigDesc.TabIndex = 6;
-            this.bigDesc.TextChanged += new System.EventHandler(this.CampaignDataValueChange);
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label27.Location = new System.Drawing.Point(65, 70);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(90, 217);
-            this.label27.TabIndex = 7;
-            this.label27.Text = "Large Description";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1419,6 +1593,10 @@
             this.tabPage7.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1544,6 +1722,20 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox bigDesc;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox infoTitle;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.Label labelWhatever;
+        private System.Windows.Forms.TextBox infoText;
+        private System.Windows.Forms.Label label234;
+        private System.Windows.Forms.TextBox infoImageName;
+        private System.Windows.Forms.CheckBox hasSeperator;
+        private System.Windows.Forms.Button removeSegment;
+        private System.Windows.Forms.Button addSegment;
+        private System.Windows.Forms.ListBox segments;
+        private System.Windows.Forms.CheckBox infoEnabled;
+        private System.Windows.Forms.CheckBox appearsEverytime;
     }
 }
 

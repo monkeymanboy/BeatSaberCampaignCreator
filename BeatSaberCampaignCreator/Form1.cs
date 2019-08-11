@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static BeatSaberCustomCampaigns.ChallengeInfo;
 
 namespace BeatSaberCampaignCreator
 {
@@ -92,6 +93,20 @@ namespace BeatSaberCampaignCreator
                 unlockableListBox.Items.Add(unlockableListBox.Items.Count);
             }
             if (unlockableListBox.Items.Count > 0) unlockableListBox.SelectedIndex = 0;
+
+            segments.Items.Clear();
+            if (challenge.challengeInfo != null)
+            {
+                foreach (InfoSegment segment in challenge.challengeInfo.segments)
+                {
+                    segments.Items.Add(segments.Items.Count);
+                }
+                if (segments.Items.Count > 0) segments.SelectedIndex = 0;
+            }
+            infoEnabled.Checked = challenge.challengeInfo != null;
+            SetInfoToSelected();
+            SetSegmentToSelected();
+
             isExtLoading = true;
             textBox1.Text = "";
             isExtLoading = false;
@@ -687,6 +702,101 @@ namespace BeatSaberCampaignCreator
             unlockableName.Text = unlockable.name;
             unlockableType.SelectedIndex = (int)unlockable.type;
             unlockableUpdating = false;
+        }
+
+
+        //Challenge Info
+        int curSegmentIndex;
+        bool infoUpdating = false;
+        bool segmentUpdating = false;
+        private void addSegment_Click(object sender, EventArgs e)
+        {
+            segments.Items.Add(segments.Items.Count);
+            Challenge challenge = campaign.challenges[currentChallenge];
+            challenge.challengeInfo.segments.Add(new InfoSegment());
+        }
+
+        private void removeSegment_Click(object sender, EventArgs e)
+        {
+            Challenge challenge = campaign.challenges[currentChallenge];
+            challenge.challengeInfo.segments.RemoveAt(curSegmentIndex);
+            segments.Items.Clear();
+            foreach (InfoSegment req in challenge.challengeInfo.segments)
+            {
+                segments.Items.Add(segments.Items.Count);
+            }
+            if (segments.Items.Count > 0) segments.SelectedIndex = 0;
+        }
+
+        private void infoEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isLoading) return;
+            Challenge challenge = campaign.challenges[currentChallenge];
+            if (infoEnabled.Checked)
+            {
+                challenge.challengeInfo = new ChallengeInfo();
+            }
+            else
+            {
+                challenge.challengeInfo = null;
+            }
+        }
+
+        //info
+        private void InfoValueChanged(object sender, EventArgs e)
+        {
+            if (infoUpdating) return;
+            UpdateInfo();
+        }
+        public void UpdateInfo()
+        {
+            Challenge challenge = campaign.challenges[currentChallenge];
+            if (challenge.challengeInfo == null) return;
+            challenge.challengeInfo.showEverytime = appearsEverytime.Checked;
+            challenge.challengeInfo.title = infoTitle.Text;
+        }
+        public void SetInfoToSelected()
+        {
+            Challenge challenge = campaign.challenges[currentChallenge];
+            if (challenge.challengeInfo == null) return;
+            appearsEverytime.Checked = challenge.challengeInfo.showEverytime;
+            infoTitle.Text = challenge.challengeInfo.title;
+        }
+
+        //segment
+        private void SegmentValueChanged(object sender, EventArgs e)
+        {
+            if (unlockableUpdating) return;
+            UpdateSegmentInfo();
+        }
+        public void UpdateSegmentInfo()
+        {
+            Challenge challenge = campaign.challenges[currentChallenge];
+            if (challenge.challengeInfo == null) return;
+            if (challenge.challengeInfo.segments.Count() == 0 || curSegmentIndex >= challenge.challengeInfo.segments.Count()) return;
+            InfoSegment segment = challenge.challengeInfo.segments[curSegmentIndex];
+            segment.hasSeperator = hasSeperator.Checked;
+            segment.imageName = infoImageName.Text;
+            segment.text = infoText.Text;
+        }
+        public void SetSegmentToSelected()
+        {
+            Challenge challenge = campaign.challenges[currentChallenge];
+            if (challenge.challengeInfo == null) return;
+            if (challenge.challengeInfo.segments.Count() == 0 || curSegmentIndex >= challenge.challengeInfo.segments.Count()) return;
+            unlockableUpdating = true;
+            InfoSegment segment = challenge.challengeInfo.segments[curSegmentIndex];
+            hasSeperator.Checked = segment.hasSeperator;
+            infoImageName.Text = segment.imageName;
+            infoText.Text = segment.text;
+            unlockableUpdating = false;
+        }
+
+        private void segments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            curSegmentIndex = segments.SelectedIndex;
+            SetSegmentToSelected();
         }
     }
 }
