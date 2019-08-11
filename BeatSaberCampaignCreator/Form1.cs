@@ -759,14 +759,16 @@ namespace BeatSaberCampaignCreator
         {
             Challenge challenge = campaign.challenges[currentChallenge];
             if (challenge.challengeInfo == null) return;
+            infoUpdating = true;
             appearsEverytime.Checked = challenge.challengeInfo.showEverytime;
             infoTitle.Text = challenge.challengeInfo.title;
+            infoUpdating = false;
         }
 
         //segment
         private void SegmentValueChanged(object sender, EventArgs e)
         {
-            if (unlockableUpdating) return;
+            if (segmentUpdating) return;
             UpdateSegmentInfo();
         }
         public void UpdateSegmentInfo()
@@ -784,12 +786,12 @@ namespace BeatSaberCampaignCreator
             Challenge challenge = campaign.challenges[currentChallenge];
             if (challenge.challengeInfo == null) return;
             if (challenge.challengeInfo.segments.Count() == 0 || curSegmentIndex >= challenge.challengeInfo.segments.Count()) return;
-            unlockableUpdating = true;
+            segmentUpdating = true;
             InfoSegment segment = challenge.challengeInfo.segments[curSegmentIndex];
             hasSeperator.Checked = segment.hasSeperator;
             infoImageName.Text = segment.imageName;
             infoText.Text = segment.text;
-            unlockableUpdating = false;
+            segmentUpdating = false;
         }
 
         private void segments_SelectedIndexChanged(object sender, EventArgs e)
