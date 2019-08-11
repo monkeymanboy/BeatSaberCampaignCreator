@@ -37,6 +37,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonLightColor = new System.Windows.Forms.Button();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label27 = new System.Windows.Forms.Label();
             this.bigDesc = new System.Windows.Forms.TextBox();
@@ -150,6 +151,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.mapArea = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -237,6 +239,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonLightColor);
             this.tabPage1.Controls.Add(this.tableLayoutPanel5);
             this.tabPage1.Controls.Add(this.allUnlocked);
             this.tabPage1.Controls.Add(this.label1);
@@ -247,6 +250,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Campaign Info";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // buttonLightColor
+            // 
+            this.buttonLightColor.Location = new System.Drawing.Point(266, 362);
+            this.buttonLightColor.Name = "buttonLightColor";
+            this.buttonLightColor.Size = new System.Drawing.Size(75, 23);
+            this.buttonLightColor.TabIndex = 6;
+            this.buttonLightColor.Text = "Light Color";
+            this.buttonLightColor.UseVisualStyleBackColor = true;
+            this.buttonLightColor.Click += new System.EventHandler(this.buttonLightColor_Click);
             // 
             // tableLayoutPanel5
             // 
@@ -1555,6 +1568,11 @@
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // colorDialog1
+            // 
+            this.colorDialog1.AnyColor = true;
+            this.colorDialog1.FullOpen = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1736,6 +1754,8 @@
         private System.Windows.Forms.ListBox segments;
         private System.Windows.Forms.CheckBox infoEnabled;
         private System.Windows.Forms.CheckBox appearsEverytime;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button buttonLightColor;
     }
 }
 

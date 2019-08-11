@@ -111,6 +111,7 @@ namespace BeatSaberCampaignCreator
             textBox1.Text = "";
             isExtLoading = false;
             isLoading = false;
+            
         }
         private void ChallengeDataValueChange(object sender, EventArgs e)
         {
@@ -799,6 +800,14 @@ namespace BeatSaberCampaignCreator
 
             curSegmentIndex = segments.SelectedIndex;
             SetSegmentToSelected();
+        }
+
+        //lights
+
+        private void buttonLightColor_Click(object sender, EventArgs e)
+        {
+            colorDialog1.ShowDialog();
+            campaign.info.lightColor = new CampaignLightColor(colorDialog1.Color.R/255f, colorDialog1.Color.G / 255f, colorDialog1.Color.B / 255f);
         }
     }
 }
