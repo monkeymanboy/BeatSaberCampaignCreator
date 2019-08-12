@@ -40,4 +40,4 @@ The info screen is broken up into segments each of which can have an image, text
 
 If you don't want an image or you don't want text for a given segment simply leave it blank. If you don't want a seperator after the given segment then just uncheck that checkbox.
 
-For images you need to create a folder inside your campaign folder called `images` and place them in there then in the `Image File Name` box just place write the name of the file, extension included
+For images you need to create a folder inside your campaign folder called `images` and place them in there then in the `Image File Name` box just write the name of the file, extension included
