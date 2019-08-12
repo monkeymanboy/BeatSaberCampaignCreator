@@ -24,7 +24,20 @@ After checking unlockable song on a given challenge you need to have the map spe
 
 Just add `Complete Campaign Challenge - challenge name` to the requirements field of the map, you can either do this for some or all difficulties just keep in mind the ones without this requirement will always be unlocked
 
-## External Requirements
-This feature will be updated so that mods can include info about modifiers so for now don't worry about it
+## External Modifiers
+This is how you add modifiers from other mods
 
-If you are a modder that wants to add external requirement support let me know and I will update this feature much sooner
+Currently as of writing this no mods support this feature if you are a modder and want to add support feel free to DM me @monkeymanboy#3669
+
+I will also update this area with how to use this feature with each mod that supports it
+
+## Info
+The info screen is an override for the base game's help screen. This doesn't mean you need to use this as a help screen though, use it for whatever you want.
+#### Appears Everytime
+If this is checked the info screen will appear everytime and if it is unchecked just the first time the challenge is played.
+#### Segments
+The info screen is broken up into segments each of which can have an image, text, and a seperator.
+
+If you don't want an image or you don't want text for a given segment simply leave it blank. If you don't want a seperator after the given segment simply then just uncheck that checkbox.
+
+For images you need to create a folder inside your campaign folder called `images` and place them in there then in the `Image File Name` box just place write the name of the file, extension included
