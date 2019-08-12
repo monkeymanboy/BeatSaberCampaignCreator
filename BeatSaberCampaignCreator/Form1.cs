@@ -80,6 +80,9 @@ namespace BeatSaberCampaignCreator
                 reqList.Items.Add(reqList.Items.Count);
             }
             if (reqList.Items.Count > 0) reqList.SelectedIndex = 0;
+            SetRequirementToSelected();
+            UpdateRequirementToggleState();
+
             externalModsList.Items.Clear();
             foreach(KeyValuePair<string, string[]> pair in challenge.externalModifiers)
             {
@@ -93,6 +96,8 @@ namespace BeatSaberCampaignCreator
                 unlockableListBox.Items.Add(unlockableListBox.Items.Count);
             }
             if (unlockableListBox.Items.Count > 0) unlockableListBox.SelectedIndex = 0;
+            SetUnlockableToSelected();
+            UpdateUnlockableToggleState();
 
             segments.Items.Clear();
             if (challenge.challengeInfo != null)
@@ -106,6 +111,7 @@ namespace BeatSaberCampaignCreator
             infoEnabled.Checked = challenge.challengeInfo != null;
             SetInfoToSelected();
             SetSegmentToSelected();
+            UpdateInfoToggleState();
 
             isExtLoading = true;
             textBox1.Text = "";
@@ -247,6 +253,7 @@ namespace BeatSaberCampaignCreator
             }
             tempList.Add(new ChallengeRequirement());
             challenge.requirements = tempList.ToArray();
+            UpdateRequirementToggleState();
         }
 
         private void remReq_Click(object sender, EventArgs e)
@@ -265,6 +272,7 @@ namespace BeatSaberCampaignCreator
                 reqList.Items.Add(reqList.Items.Count);
             }
             if (reqList.Items.Count > 0) reqList.SelectedIndex = 0;
+            UpdateRequirementToggleState();
         }
 
         private void reqList_SelectedIndexChanged(object sender, EventArgs e)
@@ -299,12 +307,20 @@ namespace BeatSaberCampaignCreator
             requirementIsMax.Checked = requirement.isMax;
             reqUpdating = false;
         }
+        public void UpdateRequirementToggleState()
+        {
+            Challenge challenge = campaign.challenges[currentChallenge];
+
+            bool isEnabled = !(challenge.requirements.Count() == 0 || curRequirementIndex >= challenge.requirements.Count());
+            requirementType.Enabled = isEnabled;
+            requirementValue.Enabled = isEnabled;
+            requirementIsMax.Enabled = isEnabled;
+        }
 
 
         //External Modifier stuff
         private void addExtMod_Click(object sender, EventArgs e)
         {
-            if (campaign == null) return;
             Challenge challenge = campaign.challenges[currentChallenge];
             string modName = ShowDialog("Mod Name (ex GameplayModifiersPlus)", "External Modifier Mod Name");
             challenge.externalModifiers.Add(modName, new string[0]);
@@ -314,7 +330,6 @@ namespace BeatSaberCampaignCreator
 
         private void remExtMod_Click(object sender, EventArgs e)
         {
-            if (campaign == null) return;
             Challenge challenge = campaign.challenges[currentChallenge];
             challenge.externalModifiers.Remove((string)externalModsList.SelectedItem);
             externalModsList.Items.Clear();
@@ -658,6 +673,7 @@ namespace BeatSaberCampaignCreator
             unlockableListBox.Items.Add(unlockableListBox.Items.Count);
             Challenge challenge = campaign.challenges[currentChallenge];
             challenge.unlockableItems.Add(new UnlockableItem());
+            UpdateUnlockableToggleState();
         }
 
         private void removeUnlockable_Click(object sender, EventArgs e)
@@ -670,6 +686,7 @@ namespace BeatSaberCampaignCreator
                 unlockableListBox.Items.Add(unlockableListBox.Items.Count);
             }
             if (unlockableListBox.Items.Count > 0) unlockableListBox.SelectedIndex = 0;
+            UpdateUnlockableToggleState();
         }
 
         private void unlockableListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -679,12 +696,10 @@ namespace BeatSaberCampaignCreator
         }
         private void UnlockableValueChanged(object sender, EventArgs e)
         {
-            if (unlockableUpdating) return;
             UpdateUnlockableInfo();
         }
         public void UpdateUnlockableInfo()
         {
-            if (campaign == null) return;
             Challenge challenge = campaign.challenges[currentChallenge];
             if (challenge.unlockableItems.Count() == 0 || curUnlockableIndex >= challenge.unlockableItems.Count()) return;
             UnlockableItem unlockable = challenge.unlockableItems[curUnlockableIndex];
@@ -704,6 +719,14 @@ namespace BeatSaberCampaignCreator
             unlockableType.SelectedIndex = (int)unlockable.type;
             unlockableUpdating = false;
         }
+        public void UpdateUnlockableToggleState()
+        {
+            Challenge challenge = campaign.challenges[currentChallenge];
+            bool isEnabled = !(challenge.unlockableItems.Count() == 0 || curUnlockableIndex >= challenge.unlockableItems.Count());
+            unlockableType.Enabled = isEnabled;
+            unlockableFile.Enabled = isEnabled;
+            unlockableName.Enabled = isEnabled;
+        }
 
 
         //Challenge Info
@@ -715,6 +738,7 @@ namespace BeatSaberCampaignCreator
             segments.Items.Add(segments.Items.Count);
             Challenge challenge = campaign.challenges[currentChallenge];
             challenge.challengeInfo.segments.Add(new InfoSegment());
+            UpdateInfoToggleState();
         }
 
         private void removeSegment_Click(object sender, EventArgs e)
@@ -727,6 +751,7 @@ namespace BeatSaberCampaignCreator
                 segments.Items.Add(segments.Items.Count);
             }
             if (segments.Items.Count > 0) segments.SelectedIndex = 0;
+            UpdateInfoToggleState();
         }
 
         private void infoEnabled_CheckedChanged(object sender, EventArgs e)
@@ -741,6 +766,9 @@ namespace BeatSaberCampaignCreator
             {
                 challenge.challengeInfo = null;
             }
+            SetInfoToSelected();
+            SetSegmentToSelected();
+            UpdateInfoToggleState();
         }
 
         //info
@@ -794,12 +822,27 @@ namespace BeatSaberCampaignCreator
             infoText.Text = segment.text;
             segmentUpdating = false;
         }
-
         private void segments_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             curSegmentIndex = segments.SelectedIndex;
             SetSegmentToSelected();
+        }
+        public void UpdateInfoToggleState()
+        {
+            Challenge challenge = campaign.challenges[currentChallenge];
+
+            bool isEnabled = challenge.challengeInfo != null;
+            infoTitle.Enabled = isEnabled;
+            appearsEverytime.Enabled = isEnabled;
+            segments.Enabled = isEnabled;
+            addSegment.Enabled = isEnabled;
+            removeSegment.Enabled = isEnabled;
+
+            isEnabled = !(challenge.challengeInfo == null || challenge.challengeInfo.segments.Count() == 0 || curSegmentIndex >= challenge.challengeInfo.segments.Count());
+            hasSeperator.Enabled = isEnabled;
+            infoImageName.Enabled = isEnabled;
+            infoText.Enabled = isEnabled;
         }
 
         //lights
