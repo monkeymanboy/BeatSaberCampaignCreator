@@ -696,6 +696,7 @@ namespace BeatSaberCampaignCreator
         }
         private void UnlockableValueChanged(object sender, EventArgs e)
         {
+            if (unlockableUpdating) return;
             UpdateUnlockableInfo();
         }
         public void UpdateUnlockableInfo()

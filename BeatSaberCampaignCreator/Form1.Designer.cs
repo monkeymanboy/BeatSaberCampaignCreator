@@ -713,7 +713,9 @@
             "fullCombo",
             "badCuts",
             "headInWall",
-            "saberInWall"});
+            "saberInWall",
+            "wallHeadbutts",
+            "spins"});
             this.requirementType.Location = new System.Drawing.Point(103, 3);
             this.requirementType.Name = "requirementType";
             this.requirementType.Size = new System.Drawing.Size(94, 21);
