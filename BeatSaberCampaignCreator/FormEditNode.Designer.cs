@@ -64,6 +64,16 @@
             // numberPortion
             // 
             this.numberPortion.Location = new System.Drawing.Point(162, 33);
+            this.numberPortion.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numberPortion.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numberPortion.Name = "numberPortion";
             this.numberPortion.Size = new System.Drawing.Size(120, 20);
             this.numberPortion.TabIndex = 2;

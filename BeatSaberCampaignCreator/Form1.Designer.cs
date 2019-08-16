@@ -1248,7 +1248,8 @@
             this.beatmapCharacteristic.Items.AddRange(new object[] {
             "Standard",
             "NoArrows",
-            "OneSaber"});
+            "OneSaber",
+            "Lawless"});
             this.beatmapCharacteristic.Location = new System.Drawing.Point(139, 75);
             this.beatmapCharacteristic.Name = "beatmapCharacteristic";
             this.beatmapCharacteristic.Size = new System.Drawing.Size(121, 21);
