@@ -152,6 +152,7 @@
             this.mapArea = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.label28 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -669,6 +670,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label28);
             this.tabPage4.Controls.Add(this.tableLayoutPanel3);
             this.tabPage4.Controls.Add(this.requirementIsMax);
             this.tabPage4.Controls.Add(this.remReq);
@@ -715,7 +717,9 @@
             "headInWall",
             "saberInWall",
             "wallHeadbutts",
-            "spins"});
+            "spins",
+            "accuracy",
+            "maintainAccuracy"});
             this.requirementType.Location = new System.Drawing.Point(103, 3);
             this.requirementType.Name = "requirementType";
             this.requirementType.Size = new System.Drawing.Size(94, 21);
@@ -1576,6 +1580,16 @@
             this.colorDialog1.AnyColor = true;
             this.colorDialog1.FullOpen = true;
             // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(175, 218);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(276, 26);
+            this.label28.TabIndex = 24;
+            this.label28.Text = "For accuracy based requirements enter the percent * 100\r\nfor example 63.17% = 631" +
+    "7";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1759,6 +1773,7 @@
         private System.Windows.Forms.CheckBox appearsEverytime;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button buttonLightColor;
+        private System.Windows.Forms.Label label28;
     }
 }
 
